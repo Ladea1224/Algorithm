@@ -13,7 +13,7 @@ int main() {
     }
 
     deque<int> deque = {n};
-    vector<int> dp(10010);
+    vector<int> dp(20000);
 
     int x = 0;
     while(!deque.empty()){
@@ -23,7 +23,7 @@ int main() {
             if(x-1 == m) break;
             deque.push_back(x-1);
         }
-        if(x*2 <= m && !dp[x*2]){
+        if(x*2 < 20000 && !dp[x*2]){
             dp[x*2] = dp[x] + 1;
             if(x*2 == m) break;
             deque.push_back(x*2);
