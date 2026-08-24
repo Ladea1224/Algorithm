@@ -8,15 +8,15 @@ int main() {
     int t;
     cin >> t;
     while(t--){
-        int k,n;
+        int n,k;
         string s;
-        cin >> k >> n >> s;
+        cin >> n >> k >> s;
 
         int cnt=0;
-        for(int i=0; i<=n-1;++i){
+        for(int i=0; i<=k-1;++i){
             if(s[i] == 'W') ++cnt;
         }
-        int p1=0, p2=n-1, result=cnt;
+        int p1=0, p2=k-1, result=cnt;
 
         while(p2 < n-1){
             if(s[p1] == 'W') --cnt;
