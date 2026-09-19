@@ -4,7 +4,10 @@
 #제한 없을 시 N! (수형도 그려지는 느낌이므로.. 참고로 10! = 10^6~10^7이라 N이 10정도 까지는 가능함. )
 import sys
 sys.setrecursionlimit(10**6)
-
+"""
+단순 방문이므로 밖에서 visit 체크하는 방식을 사용. 
+넣었다 뺐다 하는 백트래킹은 for 문 안에서 visit 체크하는 방식을 사용하면 됨.
+"""
 def recur(i):
     global answer
     answer+=1
