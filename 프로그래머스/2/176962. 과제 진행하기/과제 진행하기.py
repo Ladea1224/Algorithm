@@ -14,10 +14,6 @@ def solution(plans):
     
     now_time = 0
     while len(ended)!=len(plans):
-        if doing != -1 and progress[doing] == plans[doing][2]:
-            ended.append(doing)
-            doing = pending.pop()
-            
         for i,plan in enumerate(plans):
             if now_time == plan[1]:
                 pending.append(doing)
@@ -26,8 +22,12 @@ def solution(plans):
         if doing == -1:
             now_time+=1
             continue
-    
+            
         progress[doing]+=1
+        if progress[doing] == plans[doing][2]:
+            ended.append(doing)
+            doing = pending.pop()
+        
         now_time+=1
         
     
