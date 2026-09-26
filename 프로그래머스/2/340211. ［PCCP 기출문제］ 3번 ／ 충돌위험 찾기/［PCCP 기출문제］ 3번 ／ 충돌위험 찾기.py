@@ -97,7 +97,39 @@ def solution(points, routes):
                 
     return answer
 
-
-
-
-#풀이2: 로봇마다 따로 진행하며 시공간 정보 저장, 이후 한꺼번에 판단
+#풀이2: 로봇마다 따로 진행하며 시공간별 정보 저장, 이후 한꺼번에 판단
+def solution(points, routes):
+    points = [None] + points
+    inform = Counter()
+    
+    for route in routes:
+        r,c = points[route[0]]
+        t = 0
+        inform[(t,r,c)] += 1
+        
+        ptr = 1 #다음 루트 ptr
+        while ptr<len(route):
+            nr,nc = points[route[ptr]]
+            
+            while r!=nr:
+                r += 1 if r<nr else -1
+                t += 1
+                inform[(t,r,c)] += 1
+            while c!=nc:
+                c += 1 if c<nc else -1
+                t += 1
+                inform[(t,r,c)] += 1
+            
+            ptr += 1
+            
+    return sum(1 for cnt in inform.values() if cnt>1)
+        
+            
+        
+        
+        
+            
+            
+        
+        
+        
