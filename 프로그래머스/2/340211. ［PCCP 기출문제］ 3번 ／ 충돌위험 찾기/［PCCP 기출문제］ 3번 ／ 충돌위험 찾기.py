@@ -1,3 +1,7 @@
+"""
+(풀이 2와 같이, 있는 그대로가 아니라 다른 표현 방식으로 생각해보는 연습 필요..)
+
+#풀이 1: 있는 그대로. 시간대 별로 로봇이 움직인다고 생각.
 def getMove(r,c,nr,nc):
     if r<nr:
         return (1,0)
@@ -49,3 +53,51 @@ def solution(points, routes):
                 nrIdx[i]+=1
 
     return answer
+"""
+
+#풀이 1-2: 이런 구현 문제는 기본적으로 시간보다 깔끔함을 우선 고려해서 작성..
+# counter(딕셔너리) 사용하여 중복 카운트
+# robot 배열 하나에 정보 전부 관리
+# points 에 더미 넣어서 인덱스 처리
+# 함수 대신 삼항 연산자로 이동 처리
+
+from collections import Counter
+from copy import deepcopy
+
+def solution(points, routes):
+    points = [None] + points
+    x,m = len(routes),len(routes[0]) 
+    answer = 0
+    
+    robots = [] # [r,c,다음 route idx, 전체 route 배열]
+    for route in routes:
+        r,c = points[route[0]]
+        robots.append([r,c,1,route])
+    
+    counts = Counter((r,c) for r,c,_,_ in robots)
+    answer += sum(1 for count in counts.values() if count>1)
+
+    while robots:
+        for robot in robots:
+            r,c,rIdx,route = robot
+            nr,nc = points[route[rIdx]]
+            
+            if r!=nr:
+                robot[0] += 1 if r<nr else -1
+            else:
+                robot[1] += 1 if c<nc else -1
+        
+            if (robot[0],robot[1]) == (nr,nc):
+                robot[2] += 1
+                
+        counts = Counter((robot[0], robot[1]) for robot in robots)
+        answer += sum(1 for count in counts.values() if count > 1)
+        
+        robots = [robot for robot in robots if robot[2] < len(robot[3])]
+                
+    return answer
+
+
+
+
+#풀이2: 로봇마다 따로 진행하며 시공간 정보 저장, 이후 한꺼번에 판단
