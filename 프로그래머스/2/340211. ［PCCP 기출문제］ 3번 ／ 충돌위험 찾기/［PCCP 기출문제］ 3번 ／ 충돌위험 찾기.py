@@ -54,7 +54,7 @@ def solution(points, routes):
 
     return answer
 """
-
+"""
 #풀이 1-2: 이런 구현 문제는 기본적으로 시간보다 깔끔함을 우선 고려해서 작성..
 # counter(딕셔너리) 사용하여 중복 카운트
 # robot 배열 하나에 정보 전부 관리
@@ -62,8 +62,6 @@ def solution(points, routes):
 # 함수 대신 삼항 연산자로 이동 처리
 
 from collections import Counter
-from copy import deepcopy
-
 def solution(points, routes):
     points = [None] + points
     x,m = len(routes),len(routes[0]) 
@@ -96,8 +94,9 @@ def solution(points, routes):
         robots = [robot for robot in robots if robot[2] < len(robot[3])]
                 
     return answer
-
+"""
 #풀이2: 로봇마다 따로 진행하며 시공간별 정보 저장, 이후 한꺼번에 판단
+from collections import Counter
 def solution(points, routes):
     points = [None] + points
     inform = Counter()
