@@ -4,9 +4,8 @@ def solution(players, m, k):
     answer = 0
     
     server = 0
-    t,q = -1,deque()
-    for player in players:
-        t+=1
+    q = deque()
+    for t,player in enumerate(players):
         
         if q and q[0][0]==t:
             server -= q[0][1] 
