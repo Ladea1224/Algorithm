@@ -1,5 +1,6 @@
 from collections import deque
-
+#내 풀이: target -> 외부 탐색 = 최악의 경우 bfs 매 원소마다(n*m번) 다 돌아야 함
+#개선점: 외부 -> target 탐색 = 한번 bfs로 target 찾아내면 끝나므로 bfs 1번으로 처리됨.
 def isConn(storage,r,c):
     row, col = len(storage),len(storage[0])
     vis = [ [0]*col for _ in range(row)]
