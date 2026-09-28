@@ -1,5 +1,5 @@
 from collections import deque
-
+# 시간대 별 서버 수 배열 만들 수도 있음. 예를들어 t=3 에 증설했다면 3,4,5,6,7에 서버 개수 추가 되는 방식
 def solution(players, m, k):
     answer = 0
     
