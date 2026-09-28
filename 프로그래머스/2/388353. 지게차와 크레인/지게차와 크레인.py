@@ -29,12 +29,9 @@ def solution(storage, requests):
         if len(req)==2:
             storage = [ [x if x!=target else 0 for x in row ] for row in storage ]
         else:
-            targetIdx = []
-            for i,row in enumerate(storage):
-                for j,x in enumerate(row):
-                    if x==target and isConn(storage,i,j):
-                        targetIdx.append((i,j))
-                        
+            targetIdx = [(i,j) for i,row in enumerate(storage) 
+                         for j,x in enumerate(row) 
+                         if x==target and isConn(storage,i,j)]
             for i,j in targetIdx:
                 storage[i][j] = 0
 
