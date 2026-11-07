@@ -1,3 +1,20 @@
+# 피드백
+
+# 설치 검증 각각 해야하나? if문 4개 써야하나? switch로 나눌까? 
+    # 각각 안해도 됨. n^2*row ~= 10^7 이므로 그냥 전체 검증 해도 됨.
+    # 따라서 동작 - 검증 - 취소 흐름으로만 나누면 된다. 즉 동작 구분하는 분기만. 기둥인지 보인지는 검증 부분에서 확인
+    
+# 기둥, 보 정보 저장 어떻게??/  한꺼번에 vs 따로/ set vs list
+    # set으로 (x,y,a) 식으로 저장하면 따로 할 필요가 없고 접근도 O(1).
+    # 반사적으로 따로 나누지말고, 항상 필요 따져보고 결정.
+
+# x,y 좌표축 기준: 리스트 행,열과 혼동 주의. 
+
+# 변수 scope 문제: solution 안인지 밖인지 주의.
+
+# 0,1 뭐가 기둥인지 보인지 등 계속 혼동되므로 그냥 전역 변수 선언해서 명확히 하기(magic number 방지)
+
+# or 줄바꿈: 괄호 안에서는 자유롭게 가능
 
 GI, BO = 0, 1
 
@@ -5,19 +22,18 @@ def solution(n, build_frame):
     things = set()
 
     def can_gi(x, y):
-        if y == 0: return True
-        if (x, y, BO) in things: return True
-        if (x-1, y, BO) in things: return True
-        if (x, y-1, GI) in things: return True
-        return False
+        return (y == 0
+            or (x, y, BO) in things
+            or (x-1, y, BO) in things
+            or (x, y-1, GI) in things
+        )
 
     def can_bo(x, y):
-        if (x, y-1, GI) in things: return True
-        if (x+1, y-1, GI) in things: return True
-        if (x-1, y, BO) in things and (x+1, y, BO) in things:
-            return True
-        return False
-
+        return ((x, y-1, GI) in things
+               or (x+1, y-1, GI) in things
+               or ( (x-1, y, BO) in things and (x+1, y, BO) in things )
+               )
+        
     def is_valid():
         for x, y, a in things:
             if a == GI:
