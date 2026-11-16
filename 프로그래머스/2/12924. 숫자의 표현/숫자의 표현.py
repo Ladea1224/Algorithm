@@ -23,7 +23,7 @@ def solution(n):
     left,right = 1,1
     total = 1
     
-    while left<=right and right<=n:
+    while left<=right:
         if total<n:
             right+=1
             total+=right
