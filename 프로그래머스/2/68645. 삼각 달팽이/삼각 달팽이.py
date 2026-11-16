@@ -1,3 +1,4 @@
+"""
 # 수학이 아니라 배열로 봐서, 설명 그대로 넣기..
 
 def solution(n):
@@ -21,3 +22,31 @@ def solution(n):
         r,c = r+dr,c+dc
         
     return [x for sublist in tower for x in sublist]
+    
+"""
+#리팩토링: directions 배열 사용, 이동하는 칸수 고정인 것 이용
+
+def solution(n):
+    tower = [[0] * n for _ in range(n)]
+    directions = [(1, 0), (0, 1), (-1, -1)]
+
+    r, c = -1, 0
+    number = 1
+    direction = 0
+
+    for remaining in range(n, 0, -1):
+        dr, dc = directions[direction]
+
+        for _ in range(remaining):
+            r += dr
+            c += dc
+            tower[r][c] = number
+            number += 1
+
+        direction = (direction + 1) % 3
+
+    return [
+        tower[r][c]
+        for r in range(n)
+        for c in range(r + 1)
+    ]
